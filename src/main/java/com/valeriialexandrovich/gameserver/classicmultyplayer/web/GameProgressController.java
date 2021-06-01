@@ -3,9 +3,11 @@ package com.valeriialexandrovich.gameserver.classicmultyplayer.web;
 import com.valeriialexandrovich.gameserver.classicmultyplayer.services.GameProgressService;
 import com.valeriialexandrovich.gameserver.classicmultyplayer.web.model.StepDataDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 public class GameProgressController {
 
@@ -19,6 +21,8 @@ public class GameProgressController {
     @GetMapping("step")
     private StepDataDto gameStep(@RequestParam("gameId") final String gameId,
                                  @RequestParam("playerId") final String playerId){
+        log.debug("Game id is : {}", gameId);
+        log.debug("PlayerId id is : {}", playerId);
         return gameProgressService.findOpponentMove(gameId,playerId);
     }
 
