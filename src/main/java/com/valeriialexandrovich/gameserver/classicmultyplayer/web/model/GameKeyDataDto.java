@@ -9,5 +9,6 @@ public class GameKeyDataDto {
 
     private boolean isGameReadyToStart;
     private String gameID;
+    private Long heroID;
     private String playerID;
 }

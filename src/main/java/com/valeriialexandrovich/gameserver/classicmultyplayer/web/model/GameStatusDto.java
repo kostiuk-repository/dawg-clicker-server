@@ -8,4 +8,5 @@ import lombok.Data;
 public class GameStatusDto {
 
     private boolean status;
+    private Long heroId;
 }
