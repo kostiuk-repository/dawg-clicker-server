@@ -22,7 +22,7 @@ class GameDataHolderService {
 
     public Game getGameById(String gameId){
         return games.stream()
-                .filter(game -> !game.getId().equals(gameId))
+                .filter(game -> game.getId().equals(gameId))
                 .findAny()
                 .orElseThrow(NoSuchGameException::new);
     }

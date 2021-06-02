@@ -1,7 +1,6 @@
 package com.valeriialexandrovich.gameserver.classicmultyplayer.services;
 
 import com.valeriialexandrovich.gameserver.classicmultyplayer.data.StepData;
-import com.valeriialexandrovich.gameserver.classicmultyplayer.data.StepMetadata;
 import com.valeriialexandrovich.gameserver.classicmultyplayer.data.game.Game;
 import com.valeriialexandrovich.gameserver.classicmultyplayer.exceprions.StepNotFoundException;
 import com.valeriialexandrovich.gameserver.classicmultyplayer.mappers.StepDataMapper;
@@ -11,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
@@ -55,7 +56,7 @@ public class GameProgressService {
         Game gameById = gameDataHolderService.getGameById(gameId);
         StepData opponentStep = gameStepsDataStore.get(gameById)
                 .stream()
-                .filter(stepData -> stepData.getStepNumber() != getLastStepNumber(gameById))
+                .filter(stepData -> stepData.getStepNumber() == getLastStepNumber(gameById))
                 .filter(stepData -> !stepData.getPlayerId().equals(playerId))
                 .findFirst()
                 .orElseThrow(StepNotFoundException::new);
@@ -73,7 +74,7 @@ public class GameProgressService {
     private boolean isThereTwoLastSteps(Game gameById, Integer lastStepNumber) {
         return gameStepsDataStore.get(gameById)
                 .stream()
-                .filter(stepData -> stepData.getStepNumber() != lastStepNumber)
+                .filter(stepData -> stepData.getStepNumber() == lastStepNumber)
                 .count() == 2;
     }
 }
