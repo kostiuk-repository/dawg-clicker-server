@@ -15,4 +15,10 @@ public class GameExceptionHandler {
             Exception ex, WebRequest request) {
         return new ResponseEntity<>("Opponent step wasn't found", new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = NoSuchGameException.class)
+    public ResponseEntity<Object> handleNoSuchGameException(
+            Exception ex, WebRequest request) {
+        return new ResponseEntity<>("Problem with finding game", new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
 }

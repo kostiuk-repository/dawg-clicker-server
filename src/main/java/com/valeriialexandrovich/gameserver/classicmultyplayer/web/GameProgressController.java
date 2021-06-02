@@ -21,8 +21,6 @@ public class GameProgressController {
     @GetMapping("step")
     private StepDataDto gameStep(@RequestParam("gameId") final String gameId,
                                  @RequestParam("playerId") final String playerId){
-        log.debug("Game id is : {}", gameId);
-        log.debug("PlayerId id is : {}", playerId);
         return gameProgressService.findOpponentMove(gameId,playerId);
     }
 
